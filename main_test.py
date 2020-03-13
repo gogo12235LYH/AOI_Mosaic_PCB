@@ -106,10 +106,10 @@ if __name__ == "__main__":
     n = int(sys.argv[4])  # N
 
     # 閥值 0.1 ~ 1，TH = 0.35~0.6  & KK = 500 for SURF
-    TH, TH2 = 0.45, 0.45
+    TH, TH2 = 0.4, 0.4
 
     # 特徵點閥值，值越小特徵點越多，值越大特徵點越少
-    KK, KK2 = 1500, 1500
+    KK, KK2 = 500, 500
 
     main = MainBD(FOLDER,
                   NAME_, m, n,

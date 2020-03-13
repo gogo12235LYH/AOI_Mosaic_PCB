@@ -56,19 +56,23 @@ def s_sort_name_mn(m, n, path):  # MxN
 
     # 最外層迴圈控制 row ， 內層迴圈控制 column
     for row in range(m):
-        # 偶數 row 需要反向填寫
-        if row % 2 == 1:
-            for col in range(n - 1, -1, -1):
-                if z[row][col] is None:
-                    z[row][col] = image_name[cnt]
-                    cnt += 1
-
-        # 奇數 row 正向填寫
-        else:
-            for col in range(n):
-                if z[row][col] is None:
-                    z[row][col] = image_name[cnt]
-                    cnt += 1
+        # # 偶數 row 需要反向填寫
+        # if row % 2 == 1:
+        #     for col in range(n - 1, -1, -1):
+        #         if z[row][col] is None:
+        #             z[row][col] = image_name[cnt]
+        #             cnt += 1
+        #
+        # # 奇數 row 正向填寫
+        # else:
+        #     for col in range(n):
+        #         if z[row][col] is None:
+        #             z[row][col] = image_name[cnt]
+        #             cnt += 1
+        for col in range(n):
+            if z[row][col] is None:
+                z[row][col] = image_name[cnt]
+                cnt += 1
 
     # 矩陣旋轉90度(逆時針)，用意在於分組拼接(垂直拼接以及水平拼接)
     z = np.rot90(z, 1)

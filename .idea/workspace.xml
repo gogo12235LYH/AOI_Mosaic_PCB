@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d9e6e41-01a5-4680-b298-e771b7acaca7" name="Default Changelist" comment="" />
+    <list default="true" id="0d9e6e41-01a5-4680-b298-e771b7acaca7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AOI_STI_0218.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AOI_STI_0218.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT/Build_pts.py" beforeDir="false" afterPath="$PROJECT_DIR$/AT/Build_pts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT/Feature1.py" beforeDir="false" afterPath="$PROJECT_DIR$/AT/Feature1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT/ImageProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/AT/ImageProcessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT/LoadSrc.py" beforeDir="false" afterPath="$PROJECT_DIR$/AT/LoadSrc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/h_data/h_info.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/h_data/h_info.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1XyRGQnTjO3GdfKkN2jvg6WI7Q2" />
   <component name="ProjectViewState">
@@ -15,8 +29,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -44,13 +59,16 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1409" y="-124" width="1089" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582016272431">
-      <screen x="-1440" y="-784" width="1152" height="2008" />
+    <state x="361" y="160" width="1089" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583909102038">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="361" y="160" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1440.-1011.1152.2008@0.0.1920.1040" timestamp="1583909102038" />
     <state x="-1409" y="-124" width="1089" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1440.-784.1152.2008@-1440.-784.1152.2008" timestamp="1582016272431" />
-    <state x="-1362" y="-137" key="SettingsEditor" timestamp="1582016317936">
-      <screen x="-1440" y="-784" width="1152" height="2008" />
+    <state x="-1381" y="-685" key="SettingsEditor" timestamp="1583998232798">
+      <screen x="-1440" y="-1011" width="1152" height="2008" />
     </state>
+    <state x="-1381" y="-685" key="SettingsEditor/0.0.1920.1040/-1440.-1011.1152.2008@-1440.-1011.1152.2008" timestamp="1583998232798" />
+    <state x="220" y="151" key="SettingsEditor/0.0.1920.1040/-1440.-1011.1152.2008@0.0.1920.1040" timestamp="1583909124016" />
     <state x="-1362" y="-137" key="SettingsEditor/0.0.1920.1040/-1440.-784.1152.2008@-1440.-784.1152.2008" timestamp="1582016317936" />
   </component>
 </project>

@@ -36,9 +36,9 @@ def mask(image_, mask_ratio_=0.05):
 
 
 # 模糊化
-def blur_(images, m=0):
+def blur_(images, m=2):
     # 設置3x3矩陣每個元素為1/9
-    r = 9
+    r = 5
     kernel = np.ones((r, r), np.float32) / (r*r)
     out = []
 

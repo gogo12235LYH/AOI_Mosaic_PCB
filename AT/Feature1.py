@@ -9,11 +9,17 @@ import numpy as np
 
 class FeatureSpace(object):
     def __init__(self, img_src, img_dst, KK_, TH_):
+        """
+        :param img_src: Source image
+        :param img_dst: Destination image
+        :param KK_: SURF Threshold
+        :param TH_: Scan image ratio
+        """
         self.img1_ = img_src
         self.img2_ = img_dst
         self.KK = KK_
         self.TH_ = TH_
-        self.ratio = 0.25
+        self.ratio = 0.45
         self.d_ratio = 1 / self.ratio
 
     def Features(self, comp_H=0, comp_V=0):
@@ -62,15 +68,12 @@ class FeatureSpace(object):
             dst_centriod = find_centroid(dst_pts)
             src_centriod = find_centroid(src_pts)
 
-            # print("# src shape :", src_pts.shape)
-            # print("# ", src_centriod.shape, "\n#", dst_centriod.shape)
-
             src_backup = src_pts.copy()
             dst_backup = dst_pts.copy()
-
+            lsm = build_least_squares_error(src_backup, dst_backup)
+            # m = cv2.findHomography(src_pts,  dst_pts, cv2.RANSAC, 4.5)[0]
             cm_ = covariance_matrix(src_backup, dst_backup, src_centriod, dst_centriod)
             W, U, Vt = singular_value_decomposition(cm_)
-
             rm = build_rotation_matrix(U, Vt)
             T = find_shifting(rm, src_centriod, dst_centriod)
             print("# Shift Vector shape :", T.shape)
@@ -87,11 +90,18 @@ class FeatureSpace(object):
             #                        )[0]
 
             m = np.zeros((3, 3))
+            # m[0, 0] = lsm[1, 0]
+            # m[1, 1] = 1
+            # m[2, 2] = lsm[2, 1]
+            # m[0, 1] = lsm[1, 1]
+            # m[1, 0] = lsm[2, 0]
+            # # m[:2, :2] = rm
+            # m[0, 2] = lsm[0, 0]
+            # m[1, 2] = lsm[0, 1]
+
             m[0, 0] = 1
             m[1, 1] = 1
             m[2, 2] = 1
-            # m[0, 1] = 0
-            # m[1, 0] = 0
             m[0, 2] = T_NR[0]
             m[1, 2] = T_NR[1]
 
@@ -105,6 +115,10 @@ class FeatureSpace(object):
 
 
 def find_centroid(input_point_set):
+    """
+    :param input_point_set: Feature point's pixel position.
+    :return: Centroid from feature points.
+    """
     output_point_set = np.zeros((2, 1))
     x_mean = input_point_set[:, :, 0].mean()
     y_mean = input_point_set[:, :, 1].mean()
@@ -115,18 +129,24 @@ def find_centroid(input_point_set):
 
 def covariance_matrix(data1, data2, mean1, mean2):
     """
+    :param data1: A data set
+    :param data2: B data set
+    :param mean1: Centroid of A data set
+    :param mean2: Centroid of B data set
+    :return: Covariance Matrix
+
     #   src_points & dst_point shape is (length, 1, 2)
     #   src_mean & dst_mean shape is (2, 1)
     """
     cm = np.zeros((2, 2))
-    print("# Shape : ", data1.shape, mean1.shape)
-
+    # print("# Shape : ", data1.shape, mean1.shape)
     for i in range(len(data1)):
         data1[:, :, 0] = data1[:, :, 0] - mean1[0]
-        data1[:, :, 1] = data1[i, :, 1] - mean1[1, :]
-        data2[:, :, 0] = data2[i, :, 0] - mean2[0, :]
-        data2[:, :, 1] = data2[i, :, 1] - mean2[1, :]
+        data1[:, :, 1] = data1[i, :, 1] - mean1[1]
+        data2[:, :, 0] = data2[i, :, 0] - mean2[0]
+        data2[:, :, 1] = data2[i, :, 1] - mean2[1]
         cm += np.dot(data1[i].T, data2[i])
+        # cm += np.dot(data2[i].T, data1[i])
     return cm
 
 
@@ -135,15 +155,40 @@ def singular_value_decomposition(input_matrix):
 
 
 def build_rotation_matrix(U, Vt_):
-    # print("# Rotation Matrix shape", (np.dot(Vt_, U.T)).shape)
-    return np.dot(Vt_, U.T)
+    """
+    :param U: The matrix from Singular Value Decomposition, left orthogonal matrix
+    :param Vt_: The matrix from Singular Value Decomposition, right orthogonal matrix
+    :return: U dot Vt_ become rotation matrix
+    """
+    return np.dot(Vt_, U)
 
 
 def find_shifting(rotation_matrix, centroidA, centroidB):
     print("# Find Shifting :", rotation_matrix.shape, centroidA.shape, centroidB.shape)
     tt = (np.dot(rotation_matrix, centroidA))
-    return -tt + centroidB
+    return centroidB - tt
 
 
 def find_shifting_NR(centroidA, centroidB):
+    """
+    :param centroidA:  Source image's centroid
+    :param centroidB:  Destination image's centroid~
+    :return: Displacement between src image and dst image
+    """
     return centroidB - centroidA
+
+
+def build_least_squares_error(pointX, pointY):
+    """
+    :param pointX: Source feature point
+    :param pointY: Destination feature point
+    :return: A affine matrix solve bu least squares error method
+    """
+    pointX = pointX.reshape((-1, 2))
+    pointY = pointY.reshape((-1, 2))
+    X = np.ones((pointX.shape[0], 3))
+    X[:, 1:] = pointX
+    # print(X.shape, pointY.shape)
+    m = np.dot(np.dot(np.linalg.inv(np.dot(X.T, X)), X.T), pointY)
+    # print(m)
+    return m

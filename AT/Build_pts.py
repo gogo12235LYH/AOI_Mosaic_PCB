@@ -16,7 +16,7 @@ class MergeH(object):
         self.images = images_
         self.TH = TH_
         self.KK = KK_
-        self.t1 = 0.65
+        self.t1 = 0.645
         self.t2 = 1 - self.t1
         self.merge1 = None
 
@@ -79,7 +79,7 @@ class MergeV(object):
         self.images = images_
         self.TH = TH_
         self.KK = KK_
-        self.t1 = 0.45
+        self.t1 = 0.645
         self.t2 = 1 - self.t1
         self.merge1 = None
 
